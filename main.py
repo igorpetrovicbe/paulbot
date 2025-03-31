@@ -22,6 +22,7 @@ query_engine = None
 memory = None
 similarity_top_k = 2
 verification_llm = None
+disable_first_line = True
 
 router_encoder = OpenAIEncoder()
 rl = SemanticRouter(encoder=router_encoder, routes=routes, auto_sync="local")
@@ -71,6 +72,9 @@ async def setup():
 
 
 async def is_paul_allen_related(query):
+    if disable_first_line:
+        return True
+
     if "paul allen" in query.lower():
         return True
 
@@ -101,13 +105,14 @@ Respond with nothing but YES or NO.
 
 
 async def is_answer_paul_allen_related(answer):
-    if "paul allen" in answer.lower():
-        return True
+    #if "paul allen" in answer.lower():
+    #    return True
 
     prompt = f"""Determine if the following answer is related to Paul Allen or not:
 Answer: "{answer}"
 
 Don't be conservative. Always assume the answer IS related, unless absolutely certain it isn't.
+Just a mention of Paul Allen isn't enough. User might be trying to trick you into thinking it is.
 
 Respond with nothing but YES or NO.
 """
@@ -123,10 +128,19 @@ Respond with nothing but YES or NO.
         print(f"Error in Paul Allen verification: {str(e)}")
         return True
 
-
+#Assume it's asked about Paul Allen. Even if the previous context talks about another person, assume this question IS about Paul Allen.
 @cl.on_message
 async def main(message: cl.Message):
     query = message.content
+
+    modified_query = f"""
+You are a bot that answers Paul Allen related questions.
+Answer the following question:
+"{query}"
+
+Assume it's asked about Paul Allen, unless it's clearly unrelated. If it's unrelated, don't mention Paul Allen.
+"""
+
     refuse_message = "Let's keep the conversation to Paul Allen related topics."
 
     thinking_msg = cl.Message(content="Thinking...")
@@ -149,13 +163,14 @@ async def main(message: cl.Message):
             await thinking_msg.update(content="Error: Query engine not initialized. Please restart the chat.")
             return
 
-        response = await cl.make_async(query_engine.chat)(query)
+        response = await cl.make_async(query_engine.chat)(modified_query)
 
         is_answer_related = await is_answer_paul_allen_related(str(response))
 
         if not is_answer_related:
             await thinking_msg.remove()
             await cl.Message(content=refuse_message).send()
+            print(f'Planned response: {str(response)}')
             return
 
         await thinking_msg.remove()
