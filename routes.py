@@ -53,7 +53,7 @@ rejection_route = Route(
         "Give me a recipe for pasta.",
         "How do I fix my computer?",
         "Explain quantum mechanics.",
-        "Tell me about Bill Gates.",
+        "Tell me about Elon Musk.",
     ],
 )
 
