@@ -165,7 +165,7 @@ Assume it's asked about Paul Allen, unless it's clearly unrelated. If it's unrel
 
         response = await cl.make_async(query_engine.chat)(modified_query)
 
-        is_answer_related = await is_answer_paul_allen_related(str(response))
+        is_answer_related = await is_answer_paul_allen_related(str(response)) or router_check
 
         if not is_answer_related:
             await thinking_msg.remove()
