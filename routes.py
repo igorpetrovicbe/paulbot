@@ -1,0 +1,60 @@
+from semantic_router import Route
+
+paul_route = Route(
+    name="paul",
+    utterances=[
+        "Who co-founded Microsoft with Bill Gates?",
+        "Tell me about the early days of Microsoft.",
+        "What are some major contributions of Paul Allen?",
+        "Which billionaire invested in space exploration and artificial intelligence?",
+        "Who owned the yacht Octopus?",
+        "Which tech entrepreneur was passionate about deep-sea exploration?",
+        "What sports teams did Paul Allen own?",
+        "Who founded Vulcan Inc.?",
+        "Tell me about the legacy of Paul Allen.",
+        "Which businessman was involved in brain research and neuroscience?",
+        "Who was responsible for funding the Allen Institute for AI?",
+        "What were Paul Allen’s contributions to science and technology?",
+        "Which billionaire was known for funding historical shipwreck explorations?",
+        "Who discovered the wreck of the USS Indianapolis?",
+        "Tell me about the private fleet of Paul Allen.",
+        "Which yachts were owned by Paul Allen?",
+        "Who was a major donor in the fight against Ebola?",
+        "Tell me about Paul Allen’s contributions to wildlife conservation.",
+        "Which philanthropist invested heavily in arts and culture?",
+        "Who founded the Museum of Pop Culture in Seattle?",
+        "Which tech mogul made significant donations to combat climate change?",
+        "Tell me about Paul Allen’s role in Stratolaunch.",
+        "What impact did Paul Allen have on the Seattle Seahawks?",
+        "Who funded the research for artificial general intelligence?",
+        "Tell me about the music interests of Paul Allen.",
+        "Which billionaire played guitar in a rock band?",
+        "Who was known for collecting World War II aircraft?",
+        "Tell me about the aircraft collection of Paul Allen.",
+        "Who funded the Allen Telescope Array?",
+        "What was the role of Paul Allen in the development of space tourism?",
+        "Who was behind the funding of SpaceShipOne?",
+        "Tell me about the legacy projects of Paul Allen.",
+        "Which tech entrepreneur had a strong interest in ocean exploration?",
+        "Who was involved in efforts to retrieve historical ship artifacts?",
+        "What was the connection between Paul Allen and HMS Hood?",
+        "Who helped locate the wreck of the USS Lexington?",
+        "Tell me about the contributions of Paul Allen to marine archaeology.",
+    ],
+)
+
+rejection_route = Route(
+    name="rejected",
+    utterances=[
+        "What's the weather like?",
+        "Tell me a joke.",
+        "What’s your favorite movie?",
+        "Who is the president?",
+        "Give me a recipe for pasta.",
+        "How do I fix my computer?",
+        "Explain quantum mechanics.",
+        "Tell me about Bill Gates.",
+    ],
+)
+
+routes = [paul_route, rejection_route]
