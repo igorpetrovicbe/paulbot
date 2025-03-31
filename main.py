@@ -90,7 +90,7 @@ Respond with nothing but YES or NO.
         result = response.text.strip().upper()
         print(f"First line:{result}")
 
-        if result == 'YES':
+        if result != 'NO':
             return True
         else:
             return rl(query).name == 'paul'
@@ -117,7 +117,7 @@ Respond with nothing but YES or NO.
         result = response.text.strip().upper()
         print(f"Second line:{result}")
 
-        if result == 'YES':
+        if result != 'NO':
             return True
     except Exception as e:
         print(f"Error in Paul Allen verification: {str(e)}")
