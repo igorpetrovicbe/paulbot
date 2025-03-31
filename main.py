@@ -105,7 +105,7 @@ async def is_answer_paul_allen_related(answer):
         return True
 
     prompt = f"""Determine if the following answer is related to Paul Allen or not:
-Query: "{answer}"
+Answer: "{answer}"
 
 Don't be conservative. Always assume the answer IS related, unless absolutely certain it isn't.
 
